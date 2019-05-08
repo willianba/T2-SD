@@ -1,5 +1,8 @@
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -58,7 +61,12 @@ public class FSInterfaceImpl extends UnicastRemoteObject implements FSInterface 
 
     @Override
     public byte[] read(String path) throws RemoteException {
-        return new byte[0];
+        try {
+            Path newPath = Paths.get(path);
+            return Files.readAllBytes(newPath);
+        } catch(IOException | SecurityException | OutOfMemoryError e) {
+            return null;
+        }
     }
 
     private String[] getFilesNames(File directory) {
