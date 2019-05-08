@@ -9,7 +9,15 @@ public class FSInterfaceImpl extends UnicastRemoteObject implements FSInterface 
 
     @Override
     public String[] ls(String path) throws RemoteException {
-        return new String[0];
+        String[] files = new String[0];
+        try {
+            File directory = new File(path);
+            files = getFilesNames(directory);
+        } catch(Exception e) {
+            System.out.println("Error reading directory.");
+            System.exit(-1);
+        }
+        return files;
     }
 
     @Override
@@ -35,5 +43,16 @@ public class FSInterfaceImpl extends UnicastRemoteObject implements FSInterface 
     @Override
     public byte[] read(String path) throws RemoteException {
         return new byte[0];
+    }
+
+    private String[] getFilesNames(File directory) {
+        File[] files = directory.listFiles();
+        List<String> filesNames = new ArrayList<>();
+        for (File file : files) {
+            if (file.isFile()) {
+                filesNames.add(file.getName());
+            }
+        }
+        return filesNames.toArray(new String[0]);
     }
 }
