@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -55,7 +56,12 @@ public class FSInterfaceImpl extends UnicastRemoteObject implements FSInterface 
 
     @Override
     public int write(byte[] data, String path) throws RemoteException {
-        return 0;
+        try (FileOutputStream stream = new FileOutputStream(path)) {
+            stream.write(data);
+            return 0;
+        } catch(IOException e) {
+            return -2;
+        }
     }
 
     @Override
