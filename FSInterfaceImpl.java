@@ -20,8 +20,7 @@ public class FSInterfaceImpl extends UnicastRemoteObject implements FSInterface 
             File directory = new File(path);
             files = getFilesNames(directory);
         } catch(Exception e) {
-            System.out.println("Error reading directory.");
-            System.exit(-1);
+            return null;
         }
         return files;
     }
