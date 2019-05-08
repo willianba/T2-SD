@@ -45,7 +45,10 @@ public class FSInterfaceImpl extends UnicastRemoteObject implements FSInterface 
 
     @Override
     public int unlink(String path) throws RemoteException {
-        return 0;
+        if (new File(path).delete()) {
+            return 0;
+        }
+        return -1;
     }
 
     @Override
