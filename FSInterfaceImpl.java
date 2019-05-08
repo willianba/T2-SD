@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -32,7 +33,14 @@ public class FSInterfaceImpl extends UnicastRemoteObject implements FSInterface 
 
     @Override
     public int create(String path) throws RemoteException {
-        return 0;
+        try {
+            if (new File(path).createNewFile()) {
+                return 0;
+            }
+            return -1;
+        } catch(IOException e) {
+            return -2;
+        }
     }
 
     @Override
