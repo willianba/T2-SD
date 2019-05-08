@@ -1,9 +1,11 @@
 import java.rmi.Naming;
 
-class FSClient {
-    public static void main (String[] argv) {
+public class FSClient {
+    private static FSInterface fileService;
+
+    public static void main(String[] argv) {
         try {
-            FSInterface fileBrowser = (FSInterface) Naming.lookup ("//localhost/FileBrowser");
+            fileService = (FSInterface) Naming.lookup ("//localhost/FileService");
             // need to implements methods calls here
         } catch (Exception e) {
             System.out.println ("FSClient failed:");
@@ -11,4 +13,3 @@ class FSClient {
         }
     }
 }
-

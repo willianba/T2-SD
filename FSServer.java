@@ -2,7 +2,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
-class FSServer {
+public class FSServer {
     public static void main (String[] argv) {
         try {
             LocateRegistry.createRegistry(1099);
@@ -11,7 +11,7 @@ class FSServer {
             System.out.println("RMI registry already running.");
         }
         try {
-            Naming.rebind ("FileBrowser", new FSInterfaceImpl());
+            Naming.rebind ("FileService", new FSInterfaceImpl());
             System.out.println ("FSServer is ready.");
         } catch (Exception e) {
             System.out.println ("FSServer failed:");

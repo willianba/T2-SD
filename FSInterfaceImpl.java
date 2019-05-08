@@ -2,7 +2,10 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 public class FSInterfaceImpl extends UnicastRemoteObject implements FSInterface {
-    public FSInterfaceImpl() throws RemoteException {}
+    private static final long serialVersionUID = -7643804566280949654L;
+
+    public FSInterfaceImpl() throws RemoteException {
+    }
 
     @Override
     public String[] ls(String path) throws RemoteException {
