@@ -1,11 +1,13 @@
+import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FSInterfaceImpl extends UnicastRemoteObject implements FSInterface {
     private static final long serialVersionUID = -7643804566280949654L;
 
-    public FSInterfaceImpl() throws RemoteException {
-    }
+    public FSInterfaceImpl() throws RemoteException {}
 
     @Override
     public String[] ls(String path) throws RemoteException {
@@ -22,7 +24,10 @@ public class FSInterfaceImpl extends UnicastRemoteObject implements FSInterface 
 
     @Override
     public int mkdir(String path) throws RemoteException {
-        return 0;
+        if (new File(path).mkdirs()) {
+            return 0;
+        };
+        return -1;
     }
 
     @Override
