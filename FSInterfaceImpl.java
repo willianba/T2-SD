@@ -20,7 +20,7 @@ public class FSInterfaceImpl extends UnicastRemoteObject implements FSInterface 
         try {
             File directory = new File(path);
             files = getFilesNames(directory);
-        } catch(Exception e) {
+        } catch (Exception e) {
             return null;
         }
         return files;
@@ -30,7 +30,7 @@ public class FSInterfaceImpl extends UnicastRemoteObject implements FSInterface 
     public int mkdir(String path) throws RemoteException {
         if (new File(path).mkdirs()) {
             return 0;
-        };
+        }
         return -1;
     }
 
@@ -41,7 +41,7 @@ public class FSInterfaceImpl extends UnicastRemoteObject implements FSInterface 
                 return 0;
             }
             return -1;
-        } catch(IOException e) {
+        } catch (IOException e) {
             return -2;
         }
     }
@@ -59,7 +59,7 @@ public class FSInterfaceImpl extends UnicastRemoteObject implements FSInterface 
         try (FileOutputStream stream = new FileOutputStream(path)) {
             stream.write(data);
             return 0;
-        } catch(IOException e) {
+        } catch (IOException e) {
             return -2;
         }
     }
@@ -69,7 +69,7 @@ public class FSInterfaceImpl extends UnicastRemoteObject implements FSInterface 
         try {
             Path newPath = Paths.get(path);
             return Files.readAllBytes(newPath);
-        } catch(IOException | SecurityException | OutOfMemoryError e) {
+        } catch (IOException | SecurityException | OutOfMemoryError e) {
             return null;
         }
     }
