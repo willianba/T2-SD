@@ -78,9 +78,7 @@ public class FSInterfaceImpl extends UnicastRemoteObject implements FSInterface 
         File[] files = directory.listFiles();
         List<String> filesNames = new ArrayList<>();
         for (File file : files) {
-            if (file.isFile()) {
-                filesNames.add(file.getName());
-            }
+            filesNames.add(file.getName());
         }
         return filesNames.toArray(new String[0]);
     }
