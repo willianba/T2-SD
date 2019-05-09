@@ -3,20 +3,7 @@ public class ServiceProperties {
     private int status;
     private byte[] text;
 
-    public ServiceProperties() {
-    }
-
-    public ServiceProperties(String[] files) {
-        this.files = files;
-    }
-
-    public ServiceProperties(int status) {
-        this.status = status;
-    }
-
-    public ServiceProperties(byte[] text) {
-        this.text = text;
-    }
+    public ServiceProperties() {}
 
     public void setFiles(String[] files) {
         this.files = files;
