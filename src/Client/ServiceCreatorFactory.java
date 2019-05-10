@@ -1,4 +1,4 @@
-package src.Server;
+package src.Client;
 
 import src.Services;
 import src.Strategy.*;
@@ -7,11 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ServiceCreatorFactory {
-    private static Map<Services, Strategy> services;
-
-    ServiceCreatorFactory() {
-        services = new HashMap<>();
-    }
+    private static Map<Services, Strategy> services = new HashMap<>();
 
     static {
         services.put(Services.LS, new ListDirectory());

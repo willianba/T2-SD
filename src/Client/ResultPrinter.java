@@ -2,32 +2,31 @@ package src.Client;
 
 import java.nio.charset.StandardCharsets;
 
-public class ResultPrinter {
+class ResultPrinter {
     private static ResultPrinter instance;
 
     private ResultPrinter() {
     }
 
-    public static ResultPrinter getInstance() {
+    static ResultPrinter getInstance() {
         if (instance == null) {
             instance = new ResultPrinter();
         }
         return instance;
     }
 
-    public void showResult(ServiceProperties result) {
-        String[] files = result.getFiles();
-        int status = result.getStatus();
-        byte[] text = result.getText();
-
-        if (files != null) {
-            for (String file : files) {
-                System.out.println(file);
-            }
-        } else if (text != null) {
-            System.out.println(new String(text, StandardCharsets.UTF_8));
+    <T> void showResult(T result) {
+        if (result instanceof String) {
+            System.out.println("String");
+            // need to print files when ls run
+            // for (String file : files) {
+            //     System.out.println(file);
+            // }
+        } else if (result instanceof Byte) {
+            // need to test this
+            System.out.println(new String((byte[]) result, StandardCharsets.UTF_8));
         } else {
-            System.out.println("Done. Status: " + status);
+            System.out.println("Done. Status: " + result);
         }
     }
 }
