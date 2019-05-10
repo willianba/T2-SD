@@ -15,4 +15,9 @@ public class CreateFile implements Strategy<Integer> {
             return -2;
         }
     }
+
+    @Override
+    public Integer execute(byte[] data, String path) {
+        return null;
+    }
 }

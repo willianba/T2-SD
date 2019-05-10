@@ -17,6 +17,11 @@ public class ListDirectory implements Strategy<String[]> {
         return files;
     }
 
+    @Override
+    public String[] execute(byte[] data, String path) {
+        return null;
+    }
+
     private String[] getFilesNames(File directory) {
         File[] files = directory.listFiles();
         List<String> filesNames = new ArrayList<>();

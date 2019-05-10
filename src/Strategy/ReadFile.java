@@ -16,6 +16,11 @@ public class ReadFile implements Strategy<Byte[]> {
         }
     }
 
+    @Override
+    public Byte[] execute(byte[] data, String path) {
+        return null;
+    }
+
     private Byte[] getObject(byte[] data) {
         int index = 0;
         Byte[] objectData = new Byte[data.length];

@@ -10,4 +10,9 @@ public class DeleteObject implements Strategy<Integer> {
         }
         return -1;
     }
+
+    @Override
+    public Integer execute(byte[] data, String path) {
+        return null;
+    }
 }
