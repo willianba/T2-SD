@@ -1,3 +1,7 @@
+package src.Server;
+
+import src.FSInterfaceImpl;
+
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -12,9 +16,9 @@ public class FSServer {
         }
         try {
             Naming.rebind ("FileService", new FSInterfaceImpl());
-            System.out.println ("FSServer is ready.");
+            System.out.println ("Server.FSServer is ready.");
         } catch (Exception e) {
-            System.out.println ("FSServer failed.");
+            System.out.println ("Server.FSServer failed.");
         }
     }
 }

@@ -1,3 +1,5 @@
+package src.Client;
+
 import java.nio.charset.StandardCharsets;
 
 public class ResultPrinter {
