@@ -16,9 +16,9 @@ public class FSServer {
         }
         try {
             Naming.rebind("FileService", new FSInterfaceImpl());
-            System.out.println("Server.FSServer is ready.");
+            System.out.println("FSServer is ready.");
         } catch (Exception e) {
-            System.out.println("Server.FSServer failed.");
+            System.out.println("FSServer failed.");
         }
     }
 }
