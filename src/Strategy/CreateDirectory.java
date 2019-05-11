@@ -1,14 +1,16 @@
 package src.Strategy;
 
+import src.Helpers.ReturnType;
+
 import java.io.File;
 
 public class CreateDirectory implements Strategy<Integer> {
     @Override
     public Integer execute(String path) {
         if (new File(path).mkdirs()) {
-            return 0;
+            return ReturnType.SUCCESS;
         }
-        return -1;
+        return ReturnType.ERROR;
     }
 
     @Override

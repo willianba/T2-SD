@@ -1,5 +1,7 @@
 package src.Strategy;
 
+import src.Helpers.ReturnType;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -13,9 +15,9 @@ public class WriteFile implements Strategy<Integer> {
     public Integer execute(byte[] data, String path) {
         try (FileOutputStream stream = new FileOutputStream(path)) {
             stream.write(data);
-            return 0;
+            return ReturnType.SUCCESS;
         } catch (IOException e) {
-            return -2;
+            return ReturnType.EXCEPTION;
         }
     }
 }

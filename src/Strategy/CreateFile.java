@@ -1,5 +1,7 @@
 package src.Strategy;
 
+import src.Helpers.ReturnType;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -8,11 +10,11 @@ public class CreateFile implements Strategy<Integer> {
     public Integer execute(String path) {
         try {
             if (new File(path).createNewFile()) {
-                return 0;
+                return ReturnType.SUCCESS;
             }
-            return -1;
+            return ReturnType.ERROR;
         } catch (IOException e) {
-            return -2;
+            return ReturnType.EXCEPTION;
         }
     }
 
