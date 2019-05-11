@@ -4,32 +4,34 @@ import src.FSInterface;
 import src.Services;
 
 import java.rmi.Naming;
+import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FSClient {
+    private static Map<String, Services> map = new HashMap<>();
+    private static final int EXCEPT_WRITE_LENGTH = 3;
 
-    public static <T> void main(String[] argv) {
-        Map<String, Services> map = new HashMap<>();
-        populateMap(map);
+    public static void main(String[] argv) {
         try {
+            populateMap(map);
             FSInterface fileService = (FSInterface) Naming.lookup(String.format("//%s/FileService", argv[0]));
-            // need to fix this if client calls write. need to pass argv[3]
-            T result = map.get(argv[1]).execute(argv[2], fileService);
-            ResultPrinter printer = ResultPrinter.getInstance();
-            printer.showResult(result);
+            ResultPrinter.getInstance().showResult(execute(argv, fileService));
         } catch (Exception e) {
-            System.out.println("Client.FSClient failed.");
-            e.printStackTrace();
+            System.out.println("FSClient failed.");
         }
     }
 
+    private static <T> T execute(String[] arguments, FSInterface fileService) throws RemoteException {
+        if (arguments.length == EXCEPT_WRITE_LENGTH) {
+            return map.get(arguments[1]).execute(arguments[2], fileService);
+        }
+        return map.get(arguments[1]).execute(arguments[2].getBytes(), arguments[3], fileService);
+    }
+
     private static void populateMap(Map<String, Services> map) {
-        map.put("ls", Services.LS);
-        map.put("mkdir", Services.MKDIR);
-        map.put("create", Services.CREATE);
-        map.put("unlink", Services.UNLINK);
-        map.put("write", Services.WRITE);
-        map.put("read", Services.READ);
+        for (Services service : Services.values()) {
+            map.put(service.getServiceName(), service);
+        }
     }
 }
