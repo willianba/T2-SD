@@ -3,73 +3,83 @@ package src;
 import java.rmi.RemoteException;
 
 public enum Services {
-    LS {
+    LS("ls") {
         @Override
         public String[] execute(String path, FSInterface fileService) throws RemoteException {
             return fileService.ls(path);
         }
 
         @Override
-        public <T> T execute(String path, byte[] data, FSInterface fileService) {
+        public <T> T execute(byte[] data, String path, FSInterface fileService) {
             return null;
         }
     },
-    MKDIR {
+    MKDIR("mkdir") {
         @Override
         public Integer execute(String path, FSInterface fileService) throws RemoteException {
             return fileService.mkdir(path);
         }
 
         @Override
-        public <T> T execute(String path, byte[] data, FSInterface fileService) {
+        public <T> T execute(byte[] data, String path, FSInterface fileService) {
             return null;
         }
     },
-    CREATE {
+    CREATE("create") {
         @Override
         public Integer execute(String path, FSInterface fileService) throws RemoteException {
             return fileService.create(path);
         }
 
         @Override
-        public <T> T execute(String path, byte[] data, FSInterface fileService) {
+        public <T> T execute(byte[] data, String path, FSInterface fileService) {
             return null;
         }
     },
-    UNLINK {
+    UNLINK("unlink") {
         @Override
         public Integer execute(String path, FSInterface fileService) throws RemoteException {
             return fileService.unlink(path);
         }
 
         @Override
-        public <T> T execute(String path, byte[] data, FSInterface fileService) {
+        public <T> T execute(byte[] data, String path, FSInterface fileService) {
             return null;
         }
     },
-    WRITE {
+    WRITE("write") {
         @Override
         public <T> T execute(String path, FSInterface fileService) {
             return null;
         }
 
         @Override
-        public Integer execute(String path, byte[] data, FSInterface fileService) throws RemoteException {
-            return fileService.write(path, data);
+        public Integer execute(byte[] data, String path, FSInterface fileService) throws RemoteException {
+            return fileService.write(data, path);
         }
     },
-    READ {
+    READ("read") {
         @Override
         public Byte[] execute(String path, FSInterface fileService) throws RemoteException {
             return fileService.read(path);
         }
 
         @Override
-        public <T> T execute(String path, byte[] data, FSInterface fileService) {
+        public <T> T execute(byte[] data, String path, FSInterface fileService) {
             return null;
         }
     };
 
+    private String serviceName;
+
+    Services(String value) {
+        this.serviceName = value;
+    }
+
+    public String getServiceName() {
+        return this.serviceName;
+    }
+
     public abstract <T> T execute(String path, FSInterface fileService) throws RemoteException;
-    public abstract <T> T execute(String path, byte[] data, FSInterface fileService) throws RemoteException;
+    public abstract <T> T execute(byte[] data, String path, FSInterface fileService) throws RemoteException;
 }
