@@ -18,7 +18,7 @@ public class ServiceCreatorFactory {
         services.put(Services.READ, new ReadFile());
     }
 
-    public static Strategy getInstance(Services service) {
+    public static Strategy getServiceInstance(Services service) {
         return services.get(service);
     }
 }
