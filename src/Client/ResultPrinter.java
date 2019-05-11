@@ -1,5 +1,6 @@
 package src.Client;
 
+import src.Helpers.ByteArrayConverter;
 import java.nio.charset.StandardCharsets;
 
 class ResultPrinter {
@@ -16,15 +17,13 @@ class ResultPrinter {
     }
 
     <T> void showResult(T result) {
-        if (result instanceof String) {
-            System.out.println("String");
-            // need to print files when ls run
-            // for (String file : files) {
-            //     System.out.println(file);
-            // }
-        } else if (result instanceof Byte) {
-            // need to test this
-            System.out.println(new String((byte[]) result, StandardCharsets.UTF_8));
+        if (result instanceof String[]) {
+             for (String file : (String[]) result) {
+                 System.out.println(file);
+             }
+        } else if (result instanceof Byte[]) {
+            byte[] bytesData = ByteArrayConverter.getInstance().convertToPrimitive((Byte[]) result);
+            System.out.println(new String(bytesData, StandardCharsets.UTF_8));
         } else {
             System.out.println("Done. Status: " + result);
         }
