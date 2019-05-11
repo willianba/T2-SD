@@ -2,6 +2,7 @@ package src;
 
 import java.rmi.RemoteException;
 
+@SuppressWarnings("unchecked")
 public enum Services {
     LS("ls") {
         @Override
