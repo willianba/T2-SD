@@ -8,6 +8,6 @@ public interface FSInterface extends Remote {
     Integer mkdir(String path) throws RemoteException;
     Integer create(String path) throws RemoteException;
     Integer unlink(String path) throws RemoteException;
-    Integer write(String path, byte[] data) throws RemoteException;
+    Integer write(byte[] data, String path) throws RemoteException;
     Byte[] read(String path) throws RemoteException;
 }

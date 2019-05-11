@@ -13,31 +13,31 @@ public class FSInterfaceImpl extends UnicastRemoteObject implements FSInterface 
 
     @Override
     public String[] ls(String path) {
-        return (String[]) ServiceCreatorFactory.getInstance(Services.LS).execute(path);
+        return (String[]) ServiceCreatorFactory.getServiceInstance(Services.LS).execute(path);
     }
 
     @Override
     public Integer mkdir(String path) {
-        return (Integer) ServiceCreatorFactory.getInstance(Services.MKDIR).execute(path);
+        return (Integer) ServiceCreatorFactory.getServiceInstance(Services.MKDIR).execute(path);
     }
 
     @Override
     public Integer create(String path) {
-        return (Integer) ServiceCreatorFactory.getInstance(Services.CREATE).execute(path);
+        return (Integer) ServiceCreatorFactory.getServiceInstance(Services.CREATE).execute(path);
     }
 
     @Override
     public Integer unlink(String path) {
-        return (Integer) ServiceCreatorFactory.getInstance(Services.UNLINK).execute(path);
+        return (Integer) ServiceCreatorFactory.getServiceInstance(Services.UNLINK).execute(path);
     }
 
     @Override
-    public Integer write(String path, byte[] data) {
-        return (Integer) ServiceCreatorFactory.getInstance(Services.WRITE).execute(data, path);
+    public Integer write(byte[] data, String path) {
+        return (Integer) ServiceCreatorFactory.getServiceInstance(Services.WRITE).execute(data, path);
     }
 
     @Override
     public Byte[] read(String path) {
-        return (Byte[]) ServiceCreatorFactory.getInstance(Services.READ).execute(path);
+        return (Byte[]) ServiceCreatorFactory.getServiceInstance(Services.READ).execute(path);
     }
 }
